@@ -1,0 +1,46 @@
+{% extends "layout.html" %} {% block title %} Edit {% endblock %} {% block main %}
+<main>
+
+
+    <article class="date-slider">
+        <div class="go-to" onclick="autoLogIn()">Go</div>
+        <input type="button" class="date-prev" id="prev" value="&lt;">
+        <input name='date' type="date" class="date-current">
+        <input type="button" class="date-next" id="next " value="&gt;">
+    </article>
+
+    {% if not data == 'none' %}
+    <div class="input-row-high">
+        <div class="label big">{{ data[0]['day'] }}</div>
+        <div class="label big">{{ data[0]['month'] }}</div>
+        <div class="label big">{{ data[0]['year'] }}</div>
+    </div>
+    <div class="input-sheet" autocomplete="off" autocorrect="off">
+        <div class="label-panel">
+
+            <div class="label">Room</div>
+            <div class="label">Adults</div>
+            <div class="label">Children</div>
+            <div class="label">Total</div>
+        </div>
+    </div>
+
+    {% for i in data%}
+    <div class="input-row">
+        <div class="label">{{ i['room'] }}</div>
+        <div class="label">{{ i['adults'] }}</div>
+        <div class="label">{{ i['children'] }}</div>
+        <div class="label">{{ i['room_total'] }}</div>
+    </div>
+    {% endfor %} {% endif %}
+
+    <div class="input-row-bottom-line">
+        <img class="copy-icon" src="../static/copy.svg" widht="50px" height="50px" onclick='generateTextMessage(".input-row")'>
+        <div id="grand-total" class="label-total">{{ data[0]['day_total'] }}</div>
+
+    </div>
+
+</main>
+
+
+{% endblock %}
