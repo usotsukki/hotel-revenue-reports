@@ -1,17 +1,18 @@
 {% extends "layout.html" %} {% block title %} Edit {% endblock %} {% block main %}
 <main>
+    <img class="copy-icon-center" src="../static/reverse.svg" onclick='fillFormAsBefore()'>
     <article class="date-slider">
         <input type="button" class="date-prev" id="prev" value="&lt;">
         <input type="date" class="date-current">
         <input type="button" class="date-next" id="next " value="&gt;">
     </article>
 
-    <div class="input-sheet" autocomplete="off" autocorrect="off">
+    <div class="input-sheet" id="input-sheet" autocomplete="off" autocorrect="off">
         <div class="label-panel">
             <div class="label">Room</div>
             <div class="label">Adults</div>
             <div class="label">Children</div>
-            <div class="label">Daily rate</div>
+            <div class="label">Rate</div>
             <div class="label none"></div>
             <div class="label">Breakfast</div>
             <div class="label">Tax</div>
@@ -515,7 +516,7 @@
         </div>
 
         <div class="submission">
-            <img class="copy-icon" src="../static/copy.svg" widht="50px" height="50px" onclick='generateTextMessage(".row-active")'>
+            <img class="copy-icon" src="../static/copy.svg" onclick='generateTextMessage(".row-active")'>
 
             <div class="submission-inner grand-total" onclick="grandTotalForDay()">
                 <p id="grand-total">0.00</p>
@@ -531,5 +532,6 @@
 
 
     </div>
+    <div id="list-re" class="list-re" value="{{ list }}"></div>
 </main>
 {% endblock %}

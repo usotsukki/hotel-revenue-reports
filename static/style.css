@@ -20,14 +20,52 @@ body {
     color: #c1c1c1;
 }
 
+body::-webkit-scrollbar {
+    width: 10px;
+    /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background: #151416;
+    /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #151416;
+    /* creates padding around scroll thumb */
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+    display: none;
+}
+
+input[type="date"] {
+    display: block;
+    text-align: center;
+    text-align: -webkit-center;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[type=date] {
+    -moz-appearance: textfield;
 }
 
 .none {
     display: none;
+}
+
+.center:hover {
+    opacity: .99;
 }
 
 .header {
@@ -94,38 +132,52 @@ main {
     padding: 1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.date-slider>:nth-child(2),
+.date-slider>:nth-child(4) {
+    margin: 1rem;
 }
 
 .date-next {
     background-color: transparent;
     color: transparent;
     border: none;
+    background-image: url('/static/arrow.svg');
     cursor: pointer;
+    height: 30px;
     width: 30px;
-    aspect-ratio: 1;
-    background-image: url(arrow.svg);
-    transition: all .25s ease-in-out;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .date-prev {
     background-color: transparent;
     color: transparent;
     border: none;
+    background-image: url('/static/arrow.svg');
     cursor: pointer;
+    height: 30px;
     width: 30px;
-    aspect-ratio: 1;
-    background-image: url(arrow.svg);
-    transition: all .25s ease-in-out;
     transform: rotate(180deg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-.date-next:hover {
-    width: 40px;
-}
-
-.date-prev:hover {
-    width: 40px;
+@media (min-width:50rem) {
+    .date-next:hover {
+        transform: scale(1.2);
+        transition: all .25s ease-in-out;
+    }
+    .date-prev:hover {
+        transform: rotate(180deg) scale(1.2);
+        transition: all .25s ease-in-out;
+    }
 }
 
 .date-current {
@@ -135,24 +187,17 @@ main {
     border: none;
     background: transparent;
     color: white;
+    -webkit-appearance: none;
 }
 
-input[type=date]::-webkit-datetime-edit {
-    text-align: center;
+.unstyled {
+    -webkit-appearance: none;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    left: 390px;
-    color: rgba(0, 0, 0, 0);
-    opacity: .4;
-    display: block;
-    background: url(/static/calendar.svg) no-repeat;
-    width: 30px;
-    height: 30px;
-    border-width: thin;
-    cursor: pointer;
-    z-index: 9999;
+.date-current::-webkit-inner-spin-button,
+.date-current::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }
 
 .date:hover {
@@ -192,13 +237,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .label-total {
     text-align: center;
-    width: 250px;
-    height: 3rem;
-    margin: 15px;
     color: white;
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    font-weight: 700;
+    font-weight: 500;
+    transition: all .2s ease-in-out;
+    font-size: 1.5rem;
+    border: none;
+    background: transparent;
+    color: rgb(0, 180, 0);
 }
 
 .input-row {
@@ -223,10 +268,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .input-row-bottom-line {
     height: 80px;
     display: flex;
-    margin-top: 3rem;
+    margin-top: 1rem;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5rem;
+    margin-bottom: 1rem;
 }
 
 .input-small {
@@ -241,14 +286,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .incr-decr-btn {
-    width: 30px;
+    text-align: center;
+    width: auto;
+    height: 1rem;
     border: none;
-    height: 1.5rem;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-    border: none;
+    font-size: 1rem;
     color: white;
     background: transparent;
+    margin: 0;
 }
 
 .input-big {
@@ -322,11 +367,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .copy-icon {
-    position: absolute;
-    transform: translateX(-35vw);
-    width: 50px;
-    height: 50px;
+    position: relative;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
+    opacity: .6;
+}
+
+.copy-icon:hover {
+    opacity: 1;
+}
+
+.copy-icon-center {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    left: 90%;
+    transform: translateX(-50%);
+    opacity: .5;
 }
 
 .container {
@@ -367,6 +425,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
+.less {
+    opacity: .6;
+}
+
 .go-to:hover {
     opacity: 1;
 }
@@ -375,62 +437,141 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: rgb(0, 73, 0);
 }
 
-@media (max-width: 35rem) {
+.spacer {
+    height: 3rem;
+}
+
+@media (max-width: 50rem) {
     body {
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
+    .header {
+        width: 100vw;
+        height: 4rem;
+        padding-top: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .logo {
         display: none;
     }
-    .header {
-        max-width: 100vw;
-    }
     .date-slider {
-        max-width: 100vw;
-        padding: 0rem 2rem;
-    }
-    .input-sheet {
-        max-width: 100vw;
-    }
-    .label-panel {
-        max-width: 100vw;
-    }
-    .input-row {
         width: 100vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        justify-content: center;
     }
-    .label {
-        width: 25%;
-        margin: 0;
-    }
-    .big {
-        margin: 10px;
-        width: auto;
-    }
-    .link {
-        margin: 0;
-    }
-    .nav-links {
-        width: 100vw;
-        padding: 3rem 3rem;
-        justify-content: space-between;
-    }
-    .date-prev {
-        position: relative;
-    }
-    .date-next {
-        display: relative;
+    .date-slider>:nth-child(2),
+    .date-slider>:nth-child(4) {
+        margin: 1rem;
     }
     .date-current {
-        width: 50%;
+        font-size: 1rem;
     }
-    .go-to {
-        position: relative;
-        margin: 0;
-        left: 0;
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
     }
-    input[type="date"] {
-        color: white;
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    input[type="month"] {
+        -webkit-appearance: none !important;
     }
+    .label-total {
+        font-size: 1rem;
+    }
+    .copy-icon {
+        width: 25px;
+    }
+    .link {
+        margin: 0 1rem;
+    }
+    .date-prev,
+    .date-next {
+        width: 40px;
+    }
+    .input-sheet {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw;
+        padding: 0 5vw;
+        overflow-x: scroll;
+    }
+    .input-row,
+    .label-panel {
+        width: fit-content;
+        min-width: 90vw;
+    }
+    .label {
+        width: 20vw;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
+    }
+    .incr-decr-btn {
+        width: 20%;
+        height: 1rem;
+        line-height: 1rem;
+        align-items: center;
+        font-size: 1rem;
+    }
+    .input-small {
+        width: 40%
+    }
+    .input-big {
+        width: 90%;
+    }
+    .submission {
+        flex-direction: column;
+        height: auto;
+    }
+    .submission-inner {
+        width: 80%;
+        height: 60px;
+    }
+}
+
+.login-form {
+    position: absolute;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.login-form div,
+button {
+    margin-top: 30px;
+}
+
+.login-form btn,
+input {
+    width: 15rem;
+    height: 2rem;
+    text-align: center;
+    background-color: #C1C1C1;
+    border: none;
+}
+
+.login-form input:focus {
+    border: 3px solid #151416;
+}
+
+.login-btn {
+    height: 2rem;
+    color: #151416;
+    font-weight: 600;
+    background-color: #FFCE00;
+    border: 2px solid #151416;
 }
